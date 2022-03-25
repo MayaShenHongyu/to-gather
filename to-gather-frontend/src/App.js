@@ -1,40 +1,46 @@
-import './App.css';
-import { useEffect, useState } from 'react';
+import "./App.css";
+import SignIn from "./pages/SignIn";
 import Profile from './Profile/Profile'
 import Landing from './Landing/Landing';
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import { AuthProvider } from "./contexts/AuthContext";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
-
-  const [backendData, setBackendData] = useState(undefined);
-
-  useEffect(() => {
-    fetch("/api/test").then(
-      response => response.json()
-    ).then((data) => {
-      setBackendData(data);
-    })
-  }, []);
-
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/Profile" element={<Profile />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Signup" element={<Signup />} />
-      </Routes>
-    </Router>  
-    
-    // <div className="App">
-    //   <p>{JSON.stringify(backendData)}</p>
-    // </div>
+    <div className="App">
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Signup" element={<Signup />} />
+
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/Profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />  
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </div>
   );
 }
 
