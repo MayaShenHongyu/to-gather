@@ -1,4 +1,3 @@
-import React from 'react';
 import { React, useState } from 'react';
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -14,6 +13,8 @@ function Signup() {
     const btnstyle = {margin:'25px 0'}
 
     const { register, currentUser } = useAuth();
+    const [errorMessage, setErrorMessage] = useState();
+
     const { 
         register: reg, 
         handleSubmit,
