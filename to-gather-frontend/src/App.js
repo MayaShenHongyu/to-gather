@@ -9,10 +9,14 @@ import Dashboard from "./pages/Dashboard";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
+
 function App() {
   return (
     <div className="App">
+      
       <BrowserRouter>
+      
+       
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Landing />} />
