@@ -12,7 +12,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 150px;
+  padding-left: 20px;
 }
 
 .navbar .leftSide img {
@@ -27,10 +27,10 @@
   justify-content: center;
 }
 
-.navbar a {
+.navbar .btn {
   color: white;
   text-decoration: none;
-  margin: 20px;
+  margin: 30px;
 }
 
 .navbar button {
