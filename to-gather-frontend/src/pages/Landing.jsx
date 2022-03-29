@@ -17,9 +17,7 @@ function Landing() {
         style={{ backgroundImage: `url(${BannerImage})` }}
       >
         <div className="headerContainer">
-          <h1
-            style={{ fontWeight: "bold", textAlign: "center", color: "white" }}
-          >
+          <h1 style={{ textAlign: "center", color: "white" }}>
             {" "}
             Get To-Gather, Get Together.{" "}
           </h1>
