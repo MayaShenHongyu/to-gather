@@ -10,5 +10,14 @@ div .radio {
 }
 
 #submit-btn {
-  margin: 25px 0;
+  margin: 25px 0 10px 0;
+}
+
+.login-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-message > a {
+  margin-left: 5px;
 }

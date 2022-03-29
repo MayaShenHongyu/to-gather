@@ -1,5 +1,4 @@
 import "./App.css";
-import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -16,8 +15,7 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/Login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/Signup" element={<Signup />} />
 
             <Route
