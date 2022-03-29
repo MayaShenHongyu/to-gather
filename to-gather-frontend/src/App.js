@@ -2,7 +2,7 @@ import "./App.css";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
-import Signup from "./pages/SignUp";
+import Signup from "./pages/Signup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import { AuthProvider } from "./contexts/AuthContext";
