@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import "../styles/Landing.css";
+import "./Landing.css";
 import BannerImage from "../assets/friends.png";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";

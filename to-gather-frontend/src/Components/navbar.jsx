@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "../assets/togather-logo.png";
 import { Link } from "react-router-dom";
 //import ReorderIcon from "@material-ui/icons/Reorder";
-import "../styles/Navbar.css";
+import "./Navbar.css";
 
 function Navbar() {
   const [openLinks, setOpenLinks] = useState(false);
