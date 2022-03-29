@@ -55,7 +55,7 @@ function Login() {
             <Avatar style={avatarStyle}>
               <LoginIcon />
             </Avatar>
-            <h2>Sign in</h2>
+            <h2>Sign In</h2>
           </Grid>
 
           <form onSubmit={handleSubmit(onSubmit)}>

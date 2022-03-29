@@ -1,6 +1,7 @@
 import { React } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import handleError from "../components/ErrorHandler";
 import {
   Grid,
   Paper,
@@ -45,13 +46,7 @@ function Signup() {
   const onSubmit = (data) => {
     register(data.email + "@cornell.edu", data.password, data.userProps).catch(
       (err) => {
-        console.log(err);
-        if (err.code === "auth/email-already-in-use") {
-          setError("email", {
-            type: "custom",
-            message: "Email already in use. Please log in or use a new email.",
-          });
-        }
+        handleError(setError, err.code);
       }
     );
   };
