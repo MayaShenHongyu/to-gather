@@ -6,7 +6,8 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { setDoc, doc } from "firebase/firestore";
+import { auth, db } from "../firebase";
 
 const AuthContext = React.createContext();
 
@@ -24,13 +25,17 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   };
 
-  const register = async (email, password) => {
-    const userCredential = await createUserWithEmailAndPassword(
+  const addUserProfile = (uid, userProps) =>
+    setDoc(doc(db, "users", uid), userProps);
+
+  const register = async (email, password, userProps) => {
+    const { user } = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    return await sendEmailVerification(userCredential.user);
+    await addUserProfile(user.uid, userProps);
+    return await sendEmailVerification(user);
   };
 
   useEffect(() => {
