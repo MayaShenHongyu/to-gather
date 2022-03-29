@@ -7,44 +7,47 @@ import {
   Avatar,
   TextField,
   Button,
-  Typography,
-  Link,
-  Box,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
+import styles from "./SignUp.css";
 
 function Signup() {
   const paperStyle = {
     paddingTop: 40,
-    padding: 20,
-    height: "60vh",
-    width: 400,
+    padding: 30,
+    width: 500,
     margin: "50px auto",
   };
   const avatarStyle = {};
-  const btnstyle = { margin: "25px 0" };
+  // const btnstyle = { margin: "25px 0" };
 
   const { register, currentUser } = useAuth();
-  const [errorMessage, setErrorMessage] = useState();
-
+  const location = useLocation();
   const {
     register: reg,
     handleSubmit,
+    setError,
+    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    register(data.email, data.password).catch((err) => {
+    register(data.email, data.password, data.userProps).catch((err) => {
+      console.log(err);
       if (err.code === "auth/email-already-in-use") {
-        setErrorMessage(
-          "Email already in use. Please log in or use a new email."
-        );
+        setError("email", {
+          type: "custom",
+          message: "Email already in use. Please log in or use a new email.",
+        });
       }
     });
-    // console.log(data, errors);
   };
-  const location = useLocation();
 
   if (currentUser) {
     return <Navigate to={location.state?.from?.pathname || "/dashboard"} />;
@@ -63,9 +66,9 @@ function Signup() {
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
+              className="form-field"
               label="Email"
               placeholder="Enter your email"
-              variant="standard"
               fullWidth
               {...reg("email", {
                 required: "Required field",
@@ -79,9 +82,9 @@ function Signup() {
             />
 
             <TextField
+              className="form-field"
               label="Password"
               placeholder="Enter your password"
-              variant="standard"
               type="password"
               fullWidth
               {...reg("password", {
@@ -92,17 +95,74 @@ function Signup() {
                 },
               })}
               error={!!errors?.password}
-              helperText={errors?.password ? errors.password.message : null}
+              helperText={errors?.password?.message}
             />
 
+            <TextField
+              className="form-field"
+              label="Confirm Password"
+              type="password"
+              fullWidth
+              {...reg("passwordConfirm", {
+                shouldUnregister: true,
+                validate: (value) =>
+                  value === watch("password") || "Passwords don't match.",
+              })}
+              error={!!errors?.passwordConfirm}
+              helperText={errors?.passwordConfirm?.message}
+            />
+
+            <TextField
+              className="form-field"
+              label="First Name"
+              fullWidth
+              {...reg("userProps.firstName")}
+              error={!!errors?.firstName}
+              helperText={errors?.firstName?.message}
+            />
+
+            <TextField
+              className="form-field"
+              label="Last Name"
+              fullWidth
+              {...reg("userProps.lastName")}
+              error={!!errors?.lastName}
+              helperText={errors?.lastName?.message}
+            />
+
+            <FormControl
+              className="form-field radio"
+              {...reg("userProps.gender")}
+            >
+              <FormLabel>Gender</FormLabel>
+              <RadioGroup row defaultValue="female">
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                />
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Male"
+                />
+                <FormControlLabel
+                  value="non-binary"
+                  control={<Radio />}
+                  label="Non-Binary"
+                />
+              </RadioGroup>
+            </FormControl>
+
             <Button
+              id="submit-btn"
               type="submit"
               color="primary"
               variant="contained"
-              style={btnstyle}
+              // style={btnstyle}
               fullWidth
             >
-              Sign up
+              Create account
             </Button>
           </form>
         </Paper>
