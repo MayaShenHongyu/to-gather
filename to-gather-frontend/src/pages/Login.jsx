@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import handleError from "../components/ErrorHandler";
 import {
   Grid,
   Paper,
@@ -28,12 +29,17 @@ function Login() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm();
 
+
+
   const onSubmit = (data) => {
-    logIn(data.email, data.password);
-    // console.log(data, errors);
+    logIn(data.email, data.password).catch((error) => {
+        handleError(setError, error.code);
+      });
+    
   };
   const location = useLocation();
 
