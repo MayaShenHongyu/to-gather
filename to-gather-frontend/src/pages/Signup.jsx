@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
-import styles from "./SignUp.css";
+import "./SignUp.css";
 
 function Signup() {
   const paperStyle = {
