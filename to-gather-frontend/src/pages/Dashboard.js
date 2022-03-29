@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
+  const { currentUser} = useAuth();
   return (
     <div>
       <Navbar />
