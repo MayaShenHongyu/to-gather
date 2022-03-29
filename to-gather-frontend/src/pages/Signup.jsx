@@ -81,7 +81,7 @@ function Signup() {
               {...reg("email", {
                 required: "Required field",
                 pattern: {
-                  value: /^[A-Z0-9._%+-]/i,
+                  value: /^[A-Z0-9._%+-]+/i,
                   message: "Invalid email address",
                 },
               })}
