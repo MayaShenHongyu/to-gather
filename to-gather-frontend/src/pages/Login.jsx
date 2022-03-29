@@ -33,13 +33,10 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-
-
   const onSubmit = (data) => {
     logIn(data.email, data.password).catch((error) => {
-        handleError(setError, error.code);
-      });
-    
+      handleError(setError, error.code);
+    });
   };
   const location = useLocation();
 

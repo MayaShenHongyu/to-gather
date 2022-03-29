@@ -10,7 +10,6 @@ function Navbar() {
   const { currentUser, logOut } = useAuth();
 
   const CheckSignedIn = ({ input }) => {
-    console.log(input);
     if (!input) {
       return (
         <Link to="/Login">
