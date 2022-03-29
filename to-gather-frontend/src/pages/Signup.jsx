@@ -1,5 +1,8 @@
 import { React } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+
+import Footer from "../components/Footer";
+import BannerImage from "../assets/friends.png";
 import { useAuth } from "../contexts/AuthContext";
 import handleError from "../components/ErrorHandler";
 import {
@@ -53,6 +56,10 @@ function Signup() {
 
   return (
     <>
+    <div
+      className="landing"
+      style={{ backgroundImage: `url(${BannerImage})` }}
+    >
       <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center">
@@ -167,6 +174,7 @@ function Signup() {
           </form>
         </Paper>
       </Grid>
+      </div>
     </>
   );
 }

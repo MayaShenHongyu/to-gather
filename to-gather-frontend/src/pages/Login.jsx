@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import handleError from "../components/ErrorHandler";
+import BannerImage from "../assets/friends.png";
 import {
   Grid,
   Paper,
@@ -46,6 +47,10 @@ function Login() {
 
   return (
     <>
+     <div
+      className="landing"
+      style={{ backgroundImage: `url(${BannerImage})` }}
+    >
       <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center">
@@ -108,6 +113,7 @@ function Login() {
           </Typography>
         </Paper>
       </Grid>
+      </div>
     </>
   );
 }

@@ -21,12 +21,12 @@ function Landing() {
             style={{ fontWeight: "bold", textAlign: "center", color: "white" }}
           >
             {" "}
-            To-Gather{" "}
+            Get To-Gather, Get Together.{" "}
           </h1>
           <p style={{ textAlign: "center", color: "white" }}>
             Not sure what to do? Perfect.
           </p>
-          <Link to="/menu">
+          <Link to="/dashboard">
             <div className="button" style={{ textAlign: "center" }}>
               <button> check out nearby events </button>
             </div>

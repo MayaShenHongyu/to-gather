@@ -12,13 +12,13 @@ function Navbar() {
   const CheckSignedIn = ({ input }) => {
     if (!input) {
       return (
-        <Link to="/Login">
+        <Link className='btn' to="/Login">
           <button> Sign In </button>
         </Link>
       );
     } else {
       return (
-        <Link to="/">
+        <Link className='btn' to="/">
           <button onClick={() => logOut()}>Sign Out</button>
         </Link>
       );
@@ -31,8 +31,13 @@ function Navbar() {
   return (
     <div className="navbar">
       <div className="leftSide" id={openLinks ? "open" : "close"}>
-        <img src={Logo} />
-        <h3 style={{ color: "white" }}>ToGather</h3>
+      
+      <Link to="/dashboard">
+          <img src={Logo} />
+          </Link>
+        <Link to="/dashboard">
+            <h3 style={{ color: "white" }}>ToGather</h3>
+          </Link>
         {/* <div className="hiddenLinks">
           <Link to="/Login"> Sign-in / Sign-up </Link>
         </div> */}
