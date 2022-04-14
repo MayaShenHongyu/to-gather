@@ -13,13 +13,9 @@ export default function handleError(setError, error) {
       "email",
       "Email does not exist. Please sign up first."
     );
-  }
-
-  if (error === "auth/wrong-password") {
+  } else if (error === "auth/wrong-password") {
     setAuthError(setError, "password", "Wrong password, pleas try again.");
-  }
-
-  if (error === "auth/too-many-requests") {
+  } else if (error === "auth/too-many-requests") {
     setAuthError(
       setError,
       "password",
@@ -34,9 +30,7 @@ export default function handleError(setError, error) {
       "email",
       "Email already in use. Please log in or use a new email."
     );
-  }
-
-  if (error === "auth/invalid-email") {
+  } else if (error === "auth/invalid-email") {
     setAuthError(
       setError,
       "email",

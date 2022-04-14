@@ -6,8 +6,8 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { auth } from "../firebase";
+import { addNewUser } from "../backend";
 
 const AuthContext = React.createContext();
 
@@ -25,16 +25,13 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   };
 
-  const addUserProfile = (uid, userProps) =>
-    setDoc(doc(db, "users", uid), userProps);
-
   const register = async (email, password, userProps) => {
     const { user } = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    await addUserProfile(user.uid, userProps);
+    await addNewUser(user.uid, email, userProps);
     return await sendEmailVerification(user);
   };
 
