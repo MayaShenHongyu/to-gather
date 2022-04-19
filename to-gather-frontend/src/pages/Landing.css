@@ -1,6 +1,7 @@
 .landing {
   width: 100%;
-  height: 90vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: left;
@@ -10,6 +11,30 @@
   background-size: cover;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
+
+div .form-field {
+  margin: 10px 0;
+}
+
+.signin-signup-message {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+.signin-signup-message > a {
+  margin-left: 5px;
+  color: #ABC700;
+}
+
+#submit-btn {
+  margin: 15px 0 10px 0;
+  background: #ABC700;
+}
+
+h2 {
+  color: #ABC700;
+}
+
 
 .headerContainer {
   width: auto;
