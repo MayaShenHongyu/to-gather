@@ -12,19 +12,15 @@ import {
   Typography,
   Link,
 } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
 
 function Login() {
   const paperStyle = {
-    paddingTop: 40,
-    padding: 20,
-    height: "60vh",
+    padding: "40px 80px 50px 80px",
     width: 400,
     margin: "50px auto",
+    borderRadius: 20,
   };
-  const avatarStyle = {};
-  const btnstyle = { margin: "25px 0" };
 
   const { logIn, currentUser } = useAuth();
   const {
@@ -46,75 +42,59 @@ function Login() {
   }
 
   return (
-    <>
-     <div
-      className="landing"
-      style={{ backgroundImage: `url(${BannerImage})` }}
-    >
-      <Grid>
-        <Paper elevation={10} style={paperStyle}>
-          <Grid align="center">
-            <Avatar style={avatarStyle}>
-              <LoginIcon />
-            </Avatar>
-            <h2>Sign In</h2>
-          </Grid>
+    // <>
+    <div className="landing" style={{ backgroundImage: `url(${BannerImage})` }}>
+      <Paper elevation={10} style={paperStyle}>
+        <Grid align="center">
+          <h2>Welcome Back!</h2>
+        </Grid>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField
-              label="email"
-              placeholder="Enter your email"
-              autoComplete="email"
-              variant="standard"
-              fullWidth
-              {...register("email", {
-                required: "Required field",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
-              })}
-              error={!!errors?.email}
-              helperText={errors?.email ? errors.email.message : null}
-            />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            label="Email"
+            placeholder="Enter your email"
+            className="form-field"
+            fullWidth
+            {...register("email", {
+              required: "Required field",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            })}
+            error={!!errors?.email}
+            helperText={errors?.email ? errors.email.message : null}
+          />
 
-            <TextField
-              label="password"
-              placeholder="Enter your password"
-              variant="standard"
-              type="password"
-              fullWidth
-              {...register("password", {
-                required: "Required field",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
-              error={!!errors?.password}
-              helperText={errors?.password ? errors.password.message : null}
-            />
+          <TextField
+            label="Password"
+            placeholder="Enter your password"
+            className="form-field"
+            type="password"
+            fullWidth
+            {...register("password", {
+              required: "Required field",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
+            error={!!errors?.password}
+            helperText={errors?.password ? errors.password.message : null}
+          />
 
-            <Button
-              type="submit"
-              color="primary"
-              variant="contained"
-              style={btnstyle}
-              fullWidth
-            >
-              Sign in
-            </Button>
-          </form>
-
-          <Typography>
-            {" "}
-            Do you have an account?
-            <Link href="/Signup">Sign Up</Link>
-          </Typography>
-        </Paper>
-      </Grid>
-      </div>
-    </>
+          <Button id="submit-btn" type="submit" variant="contained" fullWidth>
+            Sign in
+          </Button>
+        </form>
+        <div className="signin-signup-message">
+          <Typography>Don't have an account?</Typography>
+          <Link href="/signup">Sign up!</Link>
+        </div>
+      </Paper>
+      {/* </Grid> */}
+    </div>
+    // </>
   );
 }
 

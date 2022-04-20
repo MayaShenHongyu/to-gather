@@ -7,8 +7,25 @@ import Landing2 from "../assets/landing2.jpg";
 import Landing3 from "../assets/landing3.jpg";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useAuth } from "../contexts/AuthContext";
 
 function Landing() {
+  const { currentUser } = useAuth();
+  const toLogIn = (
+    <Link to="/login">
+      <div className="button" style={{ textAlign: "center" }}>
+        <button> Begin your journey by signing in </button>
+      </div>
+    </Link>
+  );
+
+  const toDashboard = (
+    <Link to="/dashboard">
+      <div className="button" style={{ textAlign: "center" }}>
+        <button> Checkout nearby events </button>
+      </div>
+    </Link>
+  );
   return (
     <>
       <Navbar />
@@ -24,11 +41,12 @@ function Landing() {
           <p style={{ textAlign: "center", color: "white" }}>
             Not sure what to do? Perfect.
           </p>
-          <Link to="/dashboard">
+          {/* <Link to="/dashboard">
             <div className="button" style={{ textAlign: "center" }}>
               <button> check out nearby events </button>
             </div>
-          </Link>
+          </Link> */}
+          {currentUser ? toDashboard : toLogIn}
         </div>
       </div>
       <div className="midBanner">

@@ -1,23 +1,10 @@
-div .form-field {
+/* div .form-field {
   margin: 10px 0;
-}
+} */
 
 div .radio {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-}
-
-#submit-btn {
-  margin: 25px 0 10px 0;
-}
-
-.login-message {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.login-message > a {
-  margin-left: 5px;
 }
