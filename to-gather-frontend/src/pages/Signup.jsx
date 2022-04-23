@@ -8,7 +8,6 @@ import handleError from "../components/ErrorHandler";
 import {
   Grid,
   Paper,
-  Avatar,
   TextField,
   Button,
   FormControl,
@@ -20,16 +19,16 @@ import {
   Link,
   InputAdornment,
 } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
 import "./SignUp.css";
 
 function Signup() {
   const paperStyle = {
-    paddingTop: 40,
-    padding: 30,
+    padding: "30px 80px 40px 80px",
     width: 500,
     margin: "50px auto",
+    maxHeight: "80vh",
+    borderRadius: 20,
   };
 
   const { register, currentUser } = useAuth();
@@ -64,14 +63,12 @@ function Signup() {
         <Grid>
           <Paper elevation={10} style={paperStyle}>
             <Grid align="center">
-              <Avatar>
-                <LoginIcon />
-              </Avatar>
-              <h2>Sign up</h2>
+              <h2>Sign up for a new account</h2>
             </Grid>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
+                size="small"
                 className="form-field"
                 label="Email"
                 placeholder="Enter your email"
@@ -92,6 +89,7 @@ function Signup() {
                 helperText={errors?.email ? errors.email.message : null}
               />
               <TextField
+                size="small"
                 className="form-field"
                 label="Password"
                 placeholder="Enter your password"
@@ -108,6 +106,7 @@ function Signup() {
                 helperText={errors?.password?.message}
               />
               <TextField
+                size="small"
                 className="form-field"
                 label="Confirm Password"
                 type="password"
@@ -121,6 +120,7 @@ function Signup() {
                 helperText={errors?.passwordConfirm?.message}
               />
               <TextField
+                size="small"
                 className="form-field"
                 label="First Name"
                 fullWidth
@@ -129,6 +129,7 @@ function Signup() {
                 helperText={errors?.firstName?.message}
               />
               <TextField
+                size="small"
                 className="form-field"
                 label="Last Name"
                 fullWidth
@@ -162,13 +163,12 @@ function Signup() {
               <Button
                 id="submit-btn"
                 type="submit"
-                color="primary"
                 variant="contained"
                 fullWidth
               >
                 Create account
               </Button>
-              <div className="login-message">
+              <div className="signin-signup-message">
                 <Typography>Already have an account?</Typography>
                 <Link href="/login">Log in here.</Link>
               </div>
