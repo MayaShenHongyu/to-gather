@@ -1,10 +1,11 @@
 .navbar {
   width: 100%;
-  height: 100px;
+  height: 70px;
   background-color: #121619;
   display: flex;
   flex-direction: row;
   border-bottom: white 300px;
+  align-items: center;
 }
 
 .navbar .leftSide {
@@ -30,7 +31,7 @@
 .navbar .btn {
   color: white;
   text-decoration: none;
-  margin: 30px;
+  margin-right: 20px;
 }
 
 .navbar button {
@@ -40,11 +41,11 @@
   cursor: pointer;
   justify-content: right;
   background-color: #2744a3;
-  height: 40px;
+  height: 30px;
   width: 180px;
   color: #fbfcf9;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .navbar button:hover {
