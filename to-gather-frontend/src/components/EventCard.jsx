@@ -21,11 +21,12 @@ export default function EventCard({
   date = new Date(),
   title,
   description,
+  imgSrc,
 }) {
   // const date = Date.now();
   return (
     <div className="container" onClick={onClick}>
-      <img className="" src={Landing1} />
+      <img src={imgSrc} />
       <div className="info">
         <div className="info-date">
           <div className="month">{monthNames[date.getMonth()]}</div>
