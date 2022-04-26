@@ -1,0 +1,79 @@
+.container {
+    width: 350px;
+    height: 240px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    transition: transform .2s;
+}
+
+.container:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+.container img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.info {
+    margin-top: 20px;
+    margin-right: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    font-family: 'DM Sans';
+}
+
+.info-date {
+    font-weight: 700;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.info-date .month {
+    
+    font-size: 0.8em;
+    line-height: 0.8em;
+    color: #3D37F1;
+}
+
+.info-date .date {
+    font-size: 1.5em;
+}
+
+.info-others {
+    width: 80%;
+    padding-right: 10px;
+}
+
+.info-others .title {
+    max-height: 2.7em;
+    font-weight: 700;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.info-others .subtitle {
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
