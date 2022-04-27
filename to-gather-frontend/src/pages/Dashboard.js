@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import Navbar from "../components/Navbar";
 import MultiSelect from "../components/MultiSelect";
 import EventCard from "../components/EventCard";
-import BannerImage from "../assets/friends.png";
+import BannerImage from "../assets/background.jpg";
 // import Footer from "../components/Footer";
 import { getFilteredEvents, upLoadImage } from "../backend";
 import { FormControl, Select, MenuItem, InputLabel } from "@mui/material";
@@ -17,16 +17,6 @@ export default function Dashboard() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [dateFilter, setDateFilter] = useState();
   const [events, setEvents] = useState([]);
-
-  // useEffect(() => {
-  //   createEvent(currentUser.uid, {
-  //     name: "Wonder Girls 2010 Wonder Girls World Tour San Francisco",
-  //     description:
-  //       "We’ll get you directly seated and inside for you to enjoy the show.",
-  //     time: new Date(2021, 3, 20),
-  //     thumbnail: BannerImage,
-  //   });
-  // }, []);
 
   useEffect(() => {
     getFilteredEvents(selectedCategories).then((events) => setEvents(events));
