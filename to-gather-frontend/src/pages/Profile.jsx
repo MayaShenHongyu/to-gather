@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import PostEvent from "../components/PostEvent";
 import { createEvent, signUpForEvent, withdrawFromEvent, deleteEvent, filterEvent } from "../backend";
 
 function Profile() {
@@ -20,7 +21,9 @@ function Profile() {
     <>
       <Navbar />
 
-      <h1>Profile Page (currently for backend api testing purpose)</h1>
+      <PostEvent />
+
+      {/* <h1>Profile Page (currently for backend api testing purpose)</h1>
 
       <button onClick = {() => {
         createEvent(hostId, eventObj);
@@ -45,7 +48,7 @@ function Profile() {
       <button onClick = {() => {
         filterEvent(['Sports']);
         console.log("filter event!");
-      }}> filterEvent </button>
+      }}> filterEvent </button> */}
     </>
 
   );
