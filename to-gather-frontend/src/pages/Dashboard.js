@@ -14,13 +14,27 @@ const categories = ["Sports", "Kids", "Music", "Board Games"];
 
 export default function Dashboard() {
   const { currentUser } = useAuth();
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [dateFilter, setDateFilter] = useState();
+  const [categoryFilter, setCategoryFilter] = useState([]);
+  const [dateFilter, setDateFilter] = useState("anytime");
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    getFilteredEvents(selectedCategories).then((events) => setEvents(events));
-  }, [selectedCategories]);
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const date = now.getDate();
+    const beforeTime =
+      dateFilter === "anytime"
+        ? undefined
+        : dateFilter === "today"
+        ? new Date(year, month, date + 1)
+        : dateFilter === "in three days"
+        ? new Date(year, month, date + 3)
+        : new Date(year, month, date + 8);
+    getFilteredEvents(categoryFilter, beforeTime).then((events) =>
+      setEvents(events)
+    );
+  }, [dateFilter, categoryFilter]);
 
   return (
     <div className="landing" style={{ backgroundImage: `url(${BannerImage})` }}>
@@ -38,16 +52,17 @@ export default function Dashboard() {
                   label="Date"
                   onChange={(event) => setDateFilter(event.target.value)}
                 >
-                  <MenuItem value={10}>Today</MenuItem>
-                  <MenuItem value={20}>In three days</MenuItem>
-                  <MenuItem value={30}>In a week</MenuItem>
+                  <MenuItem value={"anytime"}>Anytime</MenuItem>
+                  <MenuItem value={"today"}>Today</MenuItem>
+                  <MenuItem value={"in three days"}>In three days</MenuItem>
+                  <MenuItem value={"in a week"}>In a week</MenuItem>
                 </Select>
               </FormControl>
               <MultiSelect
                 label="Filter category"
                 options={categories}
-                selected={selectedCategories}
-                setSelected={setSelectedCategories}
+                selected={categoryFilter}
+                setSelected={setCategoryFilter}
               />
             </div>
           </div>

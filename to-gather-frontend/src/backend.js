@@ -11,6 +11,7 @@ import {
   where,
   getDocs,
   deleteDoc,
+  Timestamp,
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
@@ -120,14 +121,16 @@ export const deleteEvent = async (eventID) => {
   await deleteDoc(eventRef);
 };
 
-export const getFilteredEvents = async (tags) => {
-  const q =
-    tags.length == 0
-      ? collection(db, EVENTS)
-      : query(
-          collection(db, EVENTS),
-          where("tags", "array-contains-any", tags)
-        );
+export const getFilteredEvents = async (tags, beforeTime) => {
+  const queryConstraints = [];
+  queryConstraints.push(where("time", ">=", new Date()));
+  if (tags.length != 0) {
+    queryConstraints.push(where("tags", "array-contains-any", tags));
+  }
+  if (beforeTime) {
+    queryConstraints.push(where("time", "<", beforeTime));
+  }
+  const q = query(collection(db, EVENTS), ...queryConstraints);
   const filteredEvents = await getDocs(q);
 
   return filteredEvents.docs.map((doc) => {
