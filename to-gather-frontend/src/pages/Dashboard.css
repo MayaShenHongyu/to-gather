@@ -11,6 +11,7 @@
     flex: 1;
     overflow: scroll;
     padding: 0 5vw;
+    margin-top: var(--navbar-height);
 }
 
 .header {
@@ -44,4 +45,16 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.event-modal {
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + var(--navbar-height) / 2));
+    height: 80%;
+    width: 70%;
+    border-radius: 30px;
+    overflow: scroll;
 }
