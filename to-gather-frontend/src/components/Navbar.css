@@ -1,6 +1,11 @@
+:root {
+  --navbar-height: 70px;
+}
+
 .navbar {
   width: 100%;
-  height: 70px;
+  height: var(--navbar-height);
+  position: absolute;
   background-color: #121619;
   display: flex;
   flex-direction: row;
