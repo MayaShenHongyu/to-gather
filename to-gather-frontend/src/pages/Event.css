@@ -3,6 +3,7 @@
     height: 90vh;
     display: flex;
     flex-direction: column;
+    background-color: rgb(205, 203, 203);
   }
   
   .eventTop {
@@ -19,9 +20,8 @@
     flex-direction: row;
     height: 55%;
     align-items: left;
-    margin-top: 50px;
     padding: 15px;
-    margin: 10px;
+    
   }
   
   .eventBottom p {
@@ -29,11 +29,52 @@
   }
 
   .eventInfo {
-    width:70%
+    width:60%
+  }
+
+  .eventInfo h2{
+    color:black;
+    height: 15px;
+  }
+
+  .eventInfo h3{
+    color: #475300;
+    font-weight: 200;
+    font-size: 15px;
+
   }
 
   .eventHost {
-    width: 30%
+    width: 35%;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    height: 200px;
+
+  }
+
+  .eventHost img{
+    width: 50px;
+    margin-right: 5px;
+    border-radius: 25px;
+  }
+
+  .eventHost h3{
+    font-size: 15px;
+  }
+
+  .eventHost p{
+    font-size: 15px;
+  }
+
+  .eventHostImg{
+    width:70px;
+
+  }
+
+  .eventHostTop {
+    flex-direction: row;
+    display: flex;
   }
   
   .event .eventBottom h1 {
@@ -46,3 +87,53 @@
     transform: translateY(-40px);
   }
   
+  .eventSignUp {
+    display: flex;
+    flex-direction: row;
+    padding:15px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background-color: white;
+    height: 12%;
+  }
+
+  .button {
+    text-align: center;
+    margin: 20px;
+  }
+
+  .eventSignUp button{
+    padding: 0 70px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    justify-content: center;
+    background-color: #afcb00;
+    height: 50px;
+    color: #f9f9fa;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  
+
+  .eventSignUpDate{
+    width: 20%;
+  }
+
+  .eventSignUpTime{
+    width:60%;
+
+  }
+
+  .eventSignUp h3{
+    color: #5D84A7;
+    height:15px;
+
+  }
+
+  .eventSignUp p{
+    font-weight: 600;
+  }
