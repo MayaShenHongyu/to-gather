@@ -9,8 +9,6 @@ export default function MultiSelect({ label, options, selected, setSelected }) {
       onChange={(_event, newValues) => setSelected(newValues)}
       id="tags-outlined"
       options={options}
-      // getOptionLabel={(option) => option}
-      //   defaultValue={[top100Films[13]]}
       filterSelectedOptions
       renderInput={(params) => (
         <FormControl sx={{ m: 1, width: 300 }}>
