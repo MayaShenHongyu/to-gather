@@ -4,6 +4,7 @@ import "./Event.css";
 import Navbar from "../components/Navbar";
 import headImage from "../assets/xy-head.jpeg";
 import MapIcon from '@mui/icons-material/Map';
+import TagIcon from '@mui/icons-material/LocalOffer';
 
 
 function Event() {
@@ -21,12 +22,15 @@ function Event() {
                 <h3> Hosted by Xuanyu Fang</h3>
                 <div className = "location">
                     <MapIcon fontSize="small"/>
-                    <p>1 East Loop Road</p>
-
+                    <h4> 1 East Loop Road</h4>
+                </div>
+                <div className = "tag">
+                    <TagIcon fontSize="small"/>
+                    <h4>Game, Entertainment</h4>
                 </div>
                 
                 <p>
-                Come have fun and enjoyed a night with board games!
+                Come have fun and enjoy a night with board games!
                 </p>
             </div>
             <div className = "eventHost">
