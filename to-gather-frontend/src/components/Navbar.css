@@ -48,6 +48,11 @@
   background-color: white;
 }
 
+#profile-btn {
+  color: white;
+  margin-left: 20px;
+}
+
 
 /* .navbar .btn {
   color: white;

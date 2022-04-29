@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Background from "../assets/background.jpg";
 import { useAuth } from "../contexts/AuthContext";
 import Navbar from "../components/Navbar";
 import MultiSelect from "../components/MultiSelect";
 import EventCard from "../components/EventCard";
-import Background from "../assets/background.jpg";
 import EventPage from "./Event";
+import Profile from "./Profile";
 // import Footer from "../components/Footer";
 import { getFilteredEvents, upLoadImage } from "../backend";
 import {
@@ -103,7 +104,8 @@ export default function Dashboard() {
           onClose={() => setSelectedEvent(undefined)}
         >
           <div className="event-modal">
-            <EventPage />
+            {/* <EventPage /> */}
+            <Profile uid={currentUser.uid} />
           </div>
         </Modal>
       </div>

@@ -26,6 +26,9 @@ function Navbar({ showCreateEventButton = false }) {
               Create event
             </Button>
           )}
+          <Button id="profile-btn" href="/profile/own">
+            Profile
+          </Button>
           <Button id="logout-btn" onClick={logOut}>
             Sign out
           </Button>

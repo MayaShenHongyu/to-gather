@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Divider } from "@mui/material";
-import Banner from "../assets/landing1.jpg";
+// import Banner from "../assets/landing1.jpg";
+import Banner from "../assets/background.jpg";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../contexts/AuthContext";
 import { getUser } from "../backend";
 import "./Profile.css";
 
-export default function Profile() {
+export default function Profile({ uid, isOwnProfilePage = false }) {
   const { currentUser } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,10 +16,12 @@ export default function Profile() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    const uid = id == "own" ? currentUser.uid : id;
-    getUser(uid, setUser, setEvents).catch((_error) => {
+    // const uid = id == "own" ? currentUser.uid : id;
+    // const uid = currentUser.uid;
+    const userID = isOwnProfilePage ? currentUser.uid : uid;
+    getUser(userID, setUser, setEvents).catch((_error) => {
       console.log(_error);
-      navigate(-1);
+      // navigate(-1);
     });
   }, []);
 
@@ -28,7 +31,7 @@ export default function Profile() {
 
   return (
     <div className="layout">
-      <Navbar />
+      {isOwnProfilePage && <Navbar />}
       <div className="banner">
         <img src={Banner} />
       </div>

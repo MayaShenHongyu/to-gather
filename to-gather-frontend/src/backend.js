@@ -11,7 +11,6 @@ import {
   where,
   getDocs,
   deleteDoc,
-  Timestamp,
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
@@ -19,22 +18,24 @@ import { db, storage } from "./firebase";
 const USERS = "users";
 const EVENTS = "events";
 
-export const getUser = async (userID, setUser, setEvents) => {
+export const getUser = async (userID, setUser, setEvents = undefined) => {
   const userRef = doc(db, USERS, userID);
   const userSnap = await getDoc(userRef);
   if (userSnap.exists()) {
     const user = userSnap.data();
     setUser(user);
-    const eventSnaps = await Promise.all(
-      user.hosting.map((eventID) => {
-        const eventRef = doc(db, EVENTS, eventID);
-        return getDoc(eventRef);
-      })
-    );
-    const events = eventSnaps
-      .filter((snap) => snap.exists())
-      .map((snap) => snap.data());
-    setEvents(events);
+    if (setEvents) {
+      const eventSnaps = await Promise.all(
+        user.hosting.map((eventID) => {
+          const eventRef = doc(db, EVENTS, eventID);
+          return getDoc(eventRef);
+        })
+      );
+      const events = eventSnaps
+        .filter((snap) => snap.exists())
+        .map((snap) => snap.data());
+      setEvents(events);
+    }
   } else {
     throw "User does not exist.";
   }
