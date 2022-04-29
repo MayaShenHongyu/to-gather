@@ -1,13 +1,14 @@
 import React from "react";
-import EventImage from "../assets/friends.png";
+import EventImage from "../assets/boardgame.jpg";
 import "./Event.css";
 import Navbar from "../components/Navbar";
 import headImage from "../assets/xy-head.jpeg";
+import MapIcon from '@mui/icons-material/Map';
+
 
 function Event() {
     return (
         <>
-        <Navbar />
         <div className="event">
             <div
                 className="eventTop"
@@ -16,10 +17,16 @@ function Event() {
 
         <div className="eventBottom">
              <div className="eventInfo">
-                <h2> Event Name</h2>
+                <h2> Game Night</h2>
                 <h3> Hosted by Xuanyu Fang</h3>
+                <div className = "location">
+                    <MapIcon fontSize="small"/>
+                    <p>1 East Loop Road</p>
+
+                </div>
+                
                 <p>
-                Event description
+                Come have fun and enjoyed a night with board games!
                 </p>
             </div>
             <div className = "eventHost">
@@ -27,7 +34,7 @@ function Event() {
                     <div className = "eventHostImg">
                         <img src={headImage} />
                     </div>
-                    
+
                     <h3> Xuanyu Fang</h3>
                 </div>
                 <div className = "eventHostBottom">

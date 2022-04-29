@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import MultiSelect from "../components/MultiSelect";
 import EventCard from "../components/EventCard";
 import BannerImage from "../assets/background.jpg";
+import EventPage from "./Event";
 // import Footer from "../components/Footer";
 import { getFilteredEvents, upLoadImage } from "../backend";
 import {
@@ -101,7 +102,9 @@ export default function Dashboard() {
           open={selectedEvent != undefined}
           onClose={() => setSelectedEvent(undefined)}
         >
-          <div className="event-modal">!! Event page goes here !!</div>
+          <div className="event-modal"> 
+            <EventPage /> 
+          </div>
         </Modal>
       </div>
     </div>

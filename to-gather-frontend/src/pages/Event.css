@@ -1,6 +1,6 @@
 .event {
     width: 100%;
-    height: 90vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     background-color: rgb(205, 203, 203);
@@ -8,7 +8,7 @@
   
   .eventTop {
     width: 100%;
-    height: 45%;
+    height: 250px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -18,7 +18,7 @@
   .eventBottom {
     display: flex;
     flex-direction: row;
-    height: 55%;
+    height: 300px;
     align-items: left;
     padding: 15px;
     
@@ -41,15 +41,35 @@
     color: #475300;
     font-weight: 200;
     font-size: 15px;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
 
   }
+
+  .location{
+    flex-direction: row;
+    display: flex;
+  }
+
+  .location svg {
+    color: white;
+    font-size: 20px;
+  }
+  
+  .location p{
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+
+  }
+
+  
 
   .eventHost {
     width: 35%;
     background-color: white;
     border-radius: 20px;
     padding: 20px;
-    height: 200px;
+    height: 160px;
 
   }
 
