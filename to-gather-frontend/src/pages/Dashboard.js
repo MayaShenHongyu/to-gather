@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import Navbar from "../components/Navbar";
 import MultiSelect from "../components/MultiSelect";
 import EventCard from "../components/EventCard";
-import BannerImage from "../assets/background.jpg";
+import Background from "../assets/background.jpg";
 // import Footer from "../components/Footer";
 import { getFilteredEvents, upLoadImage } from "../backend";
 import {
@@ -61,9 +61,9 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="landing" style={{ backgroundImage: `url(${BannerImage})` }}>
+    <div className="landing" style={{ backgroundImage: `url(${Background})` }}>
       <div className="page-frame">
-        <Navbar />
+        <Navbar showCreateEventButton={true} />
         <div className="content">
           <div className="header">
             <div className="title">Events near you</div>

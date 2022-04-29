@@ -19,6 +19,27 @@ import { db, storage } from "./firebase";
 const USERS = "users";
 const EVENTS = "events";
 
+export const getUser = async (userID, setUser, setEvents) => {
+  const userRef = doc(db, USERS, userID);
+  const userSnap = await getDoc(userRef);
+  if (userSnap.exists()) {
+    const user = userSnap.data();
+    setUser(user);
+    const eventSnaps = await Promise.all(
+      user.hosting.map((eventID) => {
+        const eventRef = doc(db, EVENTS, eventID);
+        return getDoc(eventRef);
+      })
+    );
+    const events = eventSnaps
+      .filter((snap) => snap.exists())
+      .map((snap) => snap.data());
+    setEvents(events);
+  } else {
+    throw "User does not exist.";
+  }
+};
+
 export const addNewUser = (
   userID,
   email,

@@ -5,13 +5,10 @@ import { useAuth } from "../contexts/AuthContext";
 import { Button } from "@mui/material";
 import "./Navbar.css";
 
-function Navbar() {
+function Navbar({ showCreateEventButton = false }) {
   const [openLinks, setOpenLinks] = useState(false);
   const { currentUser, logOut } = useAuth();
 
-  const toggleNavbar = () => {
-    setOpenLinks(!openLinks);
-  };
   return (
     <div className="navbar">
       <div className="leftSide" id={openLinks ? "open" : "close"}>
@@ -23,13 +20,12 @@ function Navbar() {
         </Link>
       </div>
       {currentUser && (
-        // <Link className="btn" to="/">
-        //   <button onClick={() => logOut()}>Sign Out</button>
-        // </Link>
         <div className="rightSide">
-          <Button id="create-event-btn" variant="contained">
-            Create event
-          </Button>
+          {showCreateEventButton && (
+            <Button id="create-event-btn" variant="contained">
+              Create event
+            </Button>
+          )}
           <Button id="logout-btn" onClick={logOut}>
             Sign out
           </Button>

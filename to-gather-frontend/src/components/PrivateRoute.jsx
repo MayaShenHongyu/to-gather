@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function PrivateRoute({ children }) {
@@ -7,7 +7,7 @@ export default function PrivateRoute({ children }) {
   const location = useLocation();
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <div />;
   }
 
   return currentUser ? (
