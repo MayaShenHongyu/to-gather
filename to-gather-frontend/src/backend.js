@@ -12,7 +12,8 @@ import {
   getDocs,
   deleteDoc,
 } from "firebase/firestore";
-import { db } from "./firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "./firebase";
 
 const USERS = "users";
 const EVENTS = "events";
@@ -33,11 +34,20 @@ export const addNewUser = (
     hosting: [],
   });
 
+export const upLoadImage = async (storagePath, imagedata) => {
+  const imgRef = ref(storage, storagePath);
+  await uploadBytes(imgRef, imagedata);
+  const url = await getDownloadURL(imgRef);
+  console.log(url);
+  return url;
+};
+
 export const createEvent = async (
   hostID,
   {
     name,
     time,
+    thumbnail,
     description = null,
     location = null,
     tags = [],
@@ -45,21 +55,26 @@ export const createEvent = async (
   }
 ) => {
   const eventRef = await addDoc(collection(db, EVENTS), {
-                          hostID,
-                          name,
-                          time,
-                          description,
-                          location,
-                          preferredGroupSize,
-                          tags,
-                          participants: [],
-                        });
+    hostID,
+    name,
+    time,
+    description,
+    location,
+    preferredGroupSize,
+    tags,
+    participants: [],
+  });
+
+  const thumbnailURL = await upLoadImage(eventRef.id, thumbnail);
+  await updateDoc(eventRef, {
+    thumbnail: thumbnailURL,
+  });
 
   const userRef = doc(db, USERS, hostID);
   await updateDoc(userRef, {
     hosting: arrayUnion(eventRef.id),
   });
-}
+};
 
 export const signUpForEvent = async (userID, eventID) => {
   const userRef = doc(db, USERS, userID);
@@ -69,10 +84,10 @@ export const signUpForEvent = async (userID, eventID) => {
   });
   await updateDoc(eventRef, {
     participants: arrayUnion(userID),
-  }); 
+  });
 };
 
-export const withdrawFromEvent= async (userID, eventID) => {
+export const withdrawFromEvent = async (userID, eventID) => {
   const userRef = doc(db, USERS, userID);
   const eventRef = doc(db, EVENTS, eventID);
   await updateDoc(userRef, {
@@ -80,8 +95,8 @@ export const withdrawFromEvent= async (userID, eventID) => {
   });
   await updateDoc(eventRef, {
     participants: arrayRemove(userID),
-  }); 
-}
+  });
+};
 
 export const deleteEvent = async (eventID) => {
   const eventRef = doc(db, EVENTS, eventID);
@@ -103,14 +118,20 @@ export const deleteEvent = async (eventID) => {
   });
 
   await deleteDoc(eventRef);
-}
+};
 
-export const filterEvent = async (tags) => {
-  const q = query(collection(db, EVENTS), where("tags", "array-contains-any", tags));
-  const filteredEvent = await getDocs(q);
+export const getFilteredEvents = async (tags) => {
+  const q =
+    tags.length == 0
+      ? collection(db, EVENTS)
+      : query(
+          collection(db, EVENTS),
+          where("tags", "array-contains-any", tags)
+        );
+  const filteredEvents = await getDocs(q);
 
-  //filteredEvent.forEach((e) => console.log(e.id));
-
-  return filteredEvent;
-}
-
+  return filteredEvents.docs.map((doc) => {
+    const e = doc.data();
+    return { ...e, time: e.time.toDate() };
+  });
+};

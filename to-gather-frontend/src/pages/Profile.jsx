@@ -6,16 +6,16 @@ import { createEvent, signUpForEvent, withdrawFromEvent, deleteEvent, filterEven
 function Profile() {
   let hostId = "RiKHbcE79XM1PORvZS747fgg0Er2";
   let eventObj = {
-                name: "eventbyAndy",
-                time: 5,
-                description: null,
-                location: null,
-                tags: ['Sports', 'Music'],
-                preferredGroupSize: null,
-              };
+    name: "eventbyAndy",
+    time: 5,
+    description: null,
+    location: null,
+    tags: ["Sports", "Music"],
+    preferredGroupSize: null,
+  };
 
-    let userId = "DPi0ZXMac3YHWQNxiWBwhaQu8Xi2";
-    let eventId = "AowoQxJCvxZv1gsXYanz";
+  let userId = "DPi0ZXMac3YHWQNxiWBwhaQu8Xi2";
+  let eventId = "AowoQxJCvxZv1gsXYanz";
 
   return (
     <>
@@ -50,7 +50,6 @@ function Profile() {
         console.log("filter event!");
       }}> filterEvent </button> */}
     </>
-
   );
 }
 
