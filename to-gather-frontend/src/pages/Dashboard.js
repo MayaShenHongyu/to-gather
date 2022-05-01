@@ -73,8 +73,9 @@ export default function Dashboard() {
               <MultiSelect
                 label="Filter category"
                 options={categories}
-                selected={categoryFilter}
-                setSelected={setCategoryFilter}
+                selected={selectedCategories}
+                setSelected={setSelectedCategories}
+                style={{ m: 1, width: 300 }}
               />
             </div>
           </div>
