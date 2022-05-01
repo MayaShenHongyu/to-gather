@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Divider, IconButton, Button } from "@mui/material";
-import { ArrowBack, Edit } from "@mui/icons-material";
-// import Banner from "../assets/landing1.jpg";
+import { Divider, IconButton } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
 import Banner from "../assets/background.jpg";
-import Navbar from "../components/Navbar";
-import { useAuth } from "../contexts/AuthContext";
+import EventCard from "../components/EventCard";
 import { getUser } from "../backend";
 import "./Profile.css";
 
-export default function Profile({ uid, goBack, isOwnProfilePage = false }) {
-  const { currentUser } = useAuth();
-  const { id } = useParams();
-  const navigate = useNavigate();
+export default function Profile({ uid, goBack, onClickEvent }) {
   const [user, setUser] = useState();
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    // const uid = id == "own" ? currentUser.uid : id;
-    // const uid = currentUser.uid;
-    const userID = isOwnProfilePage ? currentUser.uid : uid;
-    getUser(userID, setUser, setEvents).catch((_error) => {
+    getUser(uid, setUser, setEvents).catch((_error) => {
       console.log(_error);
       // navigate(-1);
     });
@@ -31,27 +22,16 @@ export default function Profile({ uid, goBack, isOwnProfilePage = false }) {
   }
 
   return (
-    <div
-      className="layout"
-      style={{ height: isOwnProfilePage ? "100vh" : "100%" }}
-    >
-      {isOwnProfilePage && <Navbar />}
-      {goBack && (
-        <IconButton id="back-btn" color="primary" onClick={goBack}>
-          <ArrowBack />
-        </IconButton>
-      )}
+    <div className="layout" style={{ height: "100%" }}>
+      <IconButton id="back-btn" color="primary" onClick={goBack}>
+        <ArrowBack />
+      </IconButton>
 
       <div className="banner">
         <img src={Banner} />
       </div>
 
       <div className="profile">
-        {isOwnProfilePage && (
-          <Button id="edit-btn" startIcon={<Edit />}>
-            Edit profile
-          </Button>
-        )}
         <div className="profile-picture"></div>
         <div className="name">{`${user.firstName} ${user.lastName}`}</div>
         <div className="description">
@@ -76,10 +56,16 @@ export default function Profile({ uid, goBack, isOwnProfilePage = false }) {
 
         <div className="events">
           <div className="events-title">Hostings</div>
-          {events.map((event, idx) => (
-            <div key={idx} className="events-event">
-              <div>{event.name}</div>
-            </div>
+          <div className="events-container"></div>
+          {events.map((e, idx) => (
+            <EventCard
+              key={idx}
+              title={e.name}
+              date={e.time}
+              imgSrc={e.thumbnail}
+              description={e.description}
+              onClick={() => onClickEvent(e.id)}
+            />
           ))}
         </div>
       </div>

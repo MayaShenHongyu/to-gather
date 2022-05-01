@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { upLoadImage, createEvent } from "../backend";
+import { uploadImage, createEvent } from "../backend";
 export default function NewEvent() {
   const [img, setImg] = useState();
   return (
@@ -7,7 +7,7 @@ export default function NewEvent() {
       <input type="file" onChange={(event) => setImg(event.target.files[0])} />
       <button
         onClick={() => {
-          upLoadImage("someimg", img);
+          uploadImage("someimg", img);
         }}
       >
         Upload image

@@ -4,11 +4,10 @@ import { useAuth } from "../contexts/AuthContext";
 import Navbar from "../components/Navbar";
 import MultiSelect from "../components/MultiSelect";
 import EventCard from "../components/EventCard";
-import EventPage from "./Event";
+import Event from "./Event";
 import PostEvent from "../components/PostEvent";
-import Profile from "./Profile";
 // import Footer from "../components/Footer";
-import { getFilteredEvents, upLoadImage } from "../backend";
+import { getFilteredEvents, uploadImage } from "../backend";
 import {
   FormControl,
   Select,
@@ -26,7 +25,7 @@ export default function Dashboard() {
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [dateFilter, setDateFilter] = useState("anytime");
   const [events, setEvents] = useState([]);
-  const [selectedEventIdx, setSelectedEventIdx] = useState();
+  const [selectedEventID, setSelectedEventID] = useState();
   const [isPostEventModalOpen, setIsPostEventModalOpen] = useState(false);
 
   useEffect(() => {
@@ -91,7 +90,7 @@ export default function Dashboard() {
           <div className="events-wrapper">
             {events.map((e, idx) => (
               <EventCard
-                onClick={() => setSelectedEventIdx(idx)}
+                onClick={() => setSelectedEventID(e.id)}
                 key={idx}
                 title={e.name}
                 date={e.time}
@@ -102,15 +101,22 @@ export default function Dashboard() {
           </div>
         </div>
         <Modal
-          open={selectedEventIdx != undefined}
-          onClose={() => setSelectedEventIdx(undefined)}
+          open={selectedEventID != undefined}
+          onClose={() => setSelectedEventID(undefined)}
         >
           <div className="event-modal">
-            <EventPage eventData={events[selectedEventIdx]} />
+            <Event
+              id={selectedEventID}
+              profileOnClickEvent={setSelectedEventID}
+            />
           </div>
         </Modal>
-        <Modal open={isPostEventModalOpen} onClose={togglePostEventModal}>
-          <div className="event-modal">
+        <Modal
+          BackdropProps={{ style: { backdropFilter: "blur(10px)" } }}
+          open={isPostEventModalOpen}
+          onClose={togglePostEventModal}
+        >
+          <div>
             <PostEvent handleClose={togglePostEventModal} />
           </div>
         </Modal>

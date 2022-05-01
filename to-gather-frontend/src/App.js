@@ -1,6 +1,6 @@
 import "./App.css";
-// import Profile from "./pages/ProfileTest";
 import Profile from "./pages/Profile";
+import OwnProfile from "./pages/OwnProfile";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -20,7 +20,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/event" element={<Event />} />
-
             <Route
               path="/dashboard"
               element={
@@ -34,7 +33,8 @@ function App() {
               path="/profile"
               element={
                 <PrivateRoute>
-                  <Profile isOwnProfilePage={true} />
+                  {/* <Profile isOwnProfilePage={true} /> */}
+                  <OwnProfile />
                 </PrivateRoute>
               }
             />

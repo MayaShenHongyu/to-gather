@@ -41,10 +41,7 @@ function PostEvent({ handleClose }) {
   };
 
   return (
-    <div
-      className="EventContainer"
-      style={{ backgroundImage: `url(${BannerImage})` }}
-    >
+    <div className="EventContainer">
       <Grid align="center" style={{ marginTop: "100px" }}>
         <h2 className="Title"> Create My Event </h2>
       </Grid>
