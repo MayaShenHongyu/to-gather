@@ -31,10 +31,10 @@ function App() {
             />
 
             <Route
-              path="/profile/:id"
+              path="/profile"
               element={
                 <PrivateRoute>
-                  <Profile />
+                  <Profile isOwnProfilePage={true} />
                 </PrivateRoute>
               }
             />

@@ -25,7 +25,7 @@ export default function Dashboard() {
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [dateFilter, setDateFilter] = useState("anytime");
   const [events, setEvents] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState();
+  const [selectedEventIdx, setSelectedEventIdx] = useState();
 
   useEffect(() => {
     const now = new Date();
@@ -82,7 +82,7 @@ export default function Dashboard() {
           <div className="events-wrapper">
             {events.map((e, idx) => (
               <EventCard
-                onClick={() => setSelectedEvent(idx)}
+                onClick={() => setSelectedEventIdx(idx)}
                 key={idx}
                 title={e.name}
                 date={e.time}
@@ -90,22 +90,15 @@ export default function Dashboard() {
                 description={e.description}
               />
             ))}
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
           </div>
         </div>
         <Modal
-          open={selectedEvent != undefined}
-          onClose={() => setSelectedEvent(undefined)}
+          open={selectedEventIdx != undefined}
+          onClose={() => setSelectedEventIdx(undefined)}
         >
           <div className="event-modal">
-            {/* <EventPage /> */}
-            <Profile uid={currentUser.uid} />
+            <EventPage eventData={events[selectedEventIdx]} />
+            {/* <Profile uid={currentUser.uid} /> */}
           </div>
         </Modal>
       </div>

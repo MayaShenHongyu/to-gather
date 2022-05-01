@@ -1,13 +1,20 @@
 .layout {
     --profile-pic-size: 150px;
     --gray: #6C6C6C;
-    /* height: 100vh;
-    overflow: scroll; */
+    height: 100%;
+    overflow: scroll;
+}
+
+
+#edit-btn {
+    position: absolute;
+    right: 0;
+    margin: 10px;
 }
 
 .banner {
-    width: 100vw;
-    height: 40vh;
+    height: 40%;
+    width: 100%;
 }
 
 .banner img {
@@ -20,6 +27,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+}
+
+#back-btn {
+    position: absolute;
+    color: white;
+    margin: 10px;
 }
 
 .profile-picture {
@@ -47,6 +61,7 @@
     color: var(--gray);
     max-width: 50%;
     text-align: center;
+    font-size: 15px;
 }
 
 .figures {

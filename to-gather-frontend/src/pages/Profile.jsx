@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Divider } from "@mui/material";
+import { Divider, IconButton, Button } from "@mui/material";
+import { ArrowBack, Edit } from "@mui/icons-material";
 // import Banner from "../assets/landing1.jpg";
 import Banner from "../assets/background.jpg";
 import Navbar from "../components/Navbar";
@@ -8,7 +9,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { getUser } from "../backend";
 import "./Profile.css";
 
-export default function Profile({ uid, isOwnProfilePage = false }) {
+export default function Profile({ uid, goBack, isOwnProfilePage = false }) {
   const { currentUser } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -30,13 +31,27 @@ export default function Profile({ uid, isOwnProfilePage = false }) {
   }
 
   return (
-    <div className="layout">
+    <div
+      className="layout"
+      style={{ height: isOwnProfilePage ? "100vh" : "100%" }}
+    >
       {isOwnProfilePage && <Navbar />}
+      {goBack && (
+        <IconButton id="back-btn" color="primary" onClick={goBack}>
+          <ArrowBack />
+        </IconButton>
+      )}
+
       <div className="banner">
         <img src={Banner} />
       </div>
 
       <div className="profile">
+        {isOwnProfilePage && (
+          <Button id="edit-btn" startIcon={<Edit />}>
+            Edit profile
+          </Button>
+        )}
         <div className="profile-picture"></div>
         <div className="name">{`${user.firstName} ${user.lastName}`}</div>
         <div className="description">
