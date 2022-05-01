@@ -53,7 +53,7 @@ export const addNewUser = (
     gender,
     bio,
     profilePic,
-    eventList: [],
+    participating: [],
     hosting: [],
   });
 

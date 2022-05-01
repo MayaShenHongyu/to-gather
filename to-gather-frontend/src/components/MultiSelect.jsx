@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControl, Autocomplete, TextField } from "@mui/material";
 
-export default function MultiSelect({ label, options, selected, setSelected }) {
+export default function MultiSelect({ label, options, selected, setSelected, style }) {
   return (
     <Autocomplete
       multiple
@@ -11,7 +11,7 @@ export default function MultiSelect({ label, options, selected, setSelected }) {
       options={options}
       filterSelectedOptions
       renderInput={(params) => (
-        <FormControl sx={{ m: 1, width: 300 }}>
+        <FormControl sx={style}>
           <TextField
             {...params}
             // sx={{ height: 30 }}

@@ -1,0 +1,24 @@
+.EventContainer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.Event {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.Title {
+  color: #FEFFCA;
+}
+
+.FieldTitle {
+  margin: 0px;
+}

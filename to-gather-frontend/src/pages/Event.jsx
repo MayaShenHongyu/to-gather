@@ -32,7 +32,7 @@ function Event({ eventData }) {
       <div className="event">
         <div
           className="eventTop"
-          style={{ backgroundImage: `url(${EventImage})` }}
+          style={{ backgroundImage: `url(${eventData.thumbnail})` }}
         ></div>
 
         <div className="eventBottom">

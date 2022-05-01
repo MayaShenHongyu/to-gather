@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import MultiSelect from "../components/MultiSelect";
 import EventCard from "../components/EventCard";
 import EventPage from "./Event";
+import PostEvent from "../components/PostEvent";
 import Profile from "./Profile";
 // import Footer from "../components/Footer";
 import { getFilteredEvents, upLoadImage } from "../backend";
@@ -26,6 +27,7 @@ export default function Dashboard() {
   const [dateFilter, setDateFilter] = useState("anytime");
   const [events, setEvents] = useState([]);
   const [selectedEventIdx, setSelectedEventIdx] = useState();
+  const [isPostEventModalOpen, setIsPostEventModalOpen] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -62,10 +64,16 @@ export default function Dashboard() {
     </FormControl>
   );
 
+  const togglePostEventModal = () =>
+    setIsPostEventModalOpen(!isPostEventModalOpen);
+
   return (
     <div className="landing" style={{ backgroundImage: `url(${Background})` }}>
       <div className="page-frame">
-        <Navbar showCreateEventButton={true} />
+        <Navbar
+          showCreateEventButton={true}
+          toggleCreateEvent={togglePostEventModal}
+        />
         <div className="content">
           <div className="header">
             <div className="title">Events near you</div>
@@ -76,6 +84,7 @@ export default function Dashboard() {
                 options={categories}
                 selected={categoryFilter}
                 setSelected={setCategoryFilter}
+                style={{ m: 1, width: 300 }}
               />
             </div>
           </div>
@@ -98,7 +107,11 @@ export default function Dashboard() {
         >
           <div className="event-modal">
             <EventPage eventData={events[selectedEventIdx]} />
-            {/* <Profile uid={currentUser.uid} /> */}
+          </div>
+        </Modal>
+        <Modal open={isPostEventModalOpen} onClose={togglePostEventModal}>
+          <div className="event-modal">
+            <PostEvent handleClose={togglePostEventModal} />
           </div>
         </Modal>
       </div>

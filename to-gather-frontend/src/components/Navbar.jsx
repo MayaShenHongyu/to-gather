@@ -5,7 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Button } from "@mui/material";
 import "./Navbar.css";
 
-function Navbar({ showCreateEventButton = false }) {
+function Navbar({ showCreateEventButton = false, toggleCreateEvent }) {
   const [openLinks, setOpenLinks] = useState(false);
   const { currentUser, logOut } = useAuth();
 
@@ -22,7 +22,11 @@ function Navbar({ showCreateEventButton = false }) {
       {currentUser && (
         <div className="rightSide">
           {showCreateEventButton && (
-            <Button id="create-event-btn" variant="contained">
+            <Button
+              id="create-event-btn"
+              variant="contained"
+              onClick={toggleCreateEvent}
+            >
               Create event
             </Button>
           )}
