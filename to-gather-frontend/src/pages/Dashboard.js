@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Background from "../assets/background.jpg";
 import { useAuth } from "../contexts/AuthContext";
 import Navbar from "../components/Navbar";
 import MultiSelect from "../components/MultiSelect";
 import EventCard from "../components/EventCard";
-import BannerImage from "../assets/background.jpg";
 import EventPage from "./Event";
+import PostEvent from "../components/PostEvent";
+import Profile from "./Profile";
 // import Footer from "../components/Footer";
 import { getFilteredEvents, upLoadImage } from "../backend";
 import {
@@ -24,7 +26,8 @@ export default function Dashboard() {
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [dateFilter, setDateFilter] = useState("anytime");
   const [events, setEvents] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState();
+  const [selectedEventIdx, setSelectedEventIdx] = useState();
+  const [isPostEventModalOpen, setIsPostEventModalOpen] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -61,10 +64,16 @@ export default function Dashboard() {
     </FormControl>
   );
 
+  const togglePostEventModal = () =>
+    setIsPostEventModalOpen(!isPostEventModalOpen);
+
   return (
-    <div className="landing" style={{ backgroundImage: `url(${BannerImage})` }}>
+    <div className="landing" style={{ backgroundImage: `url(${Background})` }}>
       <div className="page-frame">
-        <Navbar />
+        <Navbar
+          showCreateEventButton={true}
+          toggleCreateEvent={togglePostEventModal}
+        />
         <div className="content">
           <div className="header">
             <div className="title">Events near you</div>
@@ -73,8 +82,8 @@ export default function Dashboard() {
               <MultiSelect
                 label="Filter category"
                 options={categories}
-                selected={selectedCategories}
-                setSelected={setSelectedCategories}
+                selected={categoryFilter}
+                setSelected={setCategoryFilter}
                 style={{ m: 1, width: 300 }}
               />
             </div>
@@ -82,7 +91,7 @@ export default function Dashboard() {
           <div className="events-wrapper">
             {events.map((e, idx) => (
               <EventCard
-                onClick={() => setSelectedEvent(idx)}
+                onClick={() => setSelectedEventIdx(idx)}
                 key={idx}
                 title={e.name}
                 date={e.time}
@@ -90,21 +99,19 @@ export default function Dashboard() {
                 description={e.description}
               />
             ))}
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
           </div>
         </div>
         <Modal
-          open={selectedEvent != undefined}
-          onClose={() => setSelectedEvent(undefined)}
+          open={selectedEventIdx != undefined}
+          onClose={() => setSelectedEventIdx(undefined)}
         >
-          <div className="event-modal"> 
-            <EventPage /> 
+          <div className="event-modal">
+            <EventPage eventData={events[selectedEventIdx]} />
+          </div>
+        </Modal>
+        <Modal open={isPostEventModalOpen} onClose={togglePostEventModal}>
+          <div className="event-modal">
+            <PostEvent handleClose={togglePostEventModal} />
           </div>
         </Modal>
       </div>

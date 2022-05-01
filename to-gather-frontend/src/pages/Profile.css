@@ -1,0 +1,110 @@
+.layout {
+    --profile-pic-size: 150px;
+    --gray: #6C6C6C;
+    height: 100%;
+    overflow: scroll;
+}
+
+
+#edit-btn {
+    position: absolute;
+    right: 0;
+    margin: 10px;
+}
+
+.banner {
+    height: 40%;
+    width: 100%;
+}
+
+.banner img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#back-btn {
+    position: absolute;
+    color: white;
+    margin: 10px;
+}
+
+.profile-picture {
+    background-color: wheat;
+    height: var(--profile-pic-size);
+    width: var(--profile-pic-size);
+    position: relative;
+    top: calc(-1 * (var(--profile-pic-size) / 2));
+    /* left: calc(50vw - var(--profile-pic-size) / 2); */
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.name {
+    margin-top: calc((-1 * (var(--profile-pic-size) / 2) + 10px));
+    margin-bottom: 20px;
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.description {
+    font-family: "Sansation";
+    font-weight: 500;
+    color: var(--gray);
+    max-width: 50%;
+    text-align: center;
+    font-size: 15px;
+}
+
+.figures {
+    font-family: "Sansation";
+    margin-top: 40px;
+    display: flex;
+    /* height: 100px; */
+}
+
+.figure {
+    margin: 10px 40px;
+    text-align: center;
+}
+
+.figure .number {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 50px;
+}
+
+.figure .label {
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--gray);
+}
+
+
+.events {
+    margin-top: 40px;
+    margin-bottom: 200px;
+    max-width: 50%;
+}
+
+.events .events-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.events .events-event {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: wheat;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+}

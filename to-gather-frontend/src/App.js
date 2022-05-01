@@ -1,4 +1,5 @@
 import "./App.css";
+// import Profile from "./pages/ProfileTest";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -30,10 +31,10 @@ function App() {
             />
 
             <Route
-              path="/Profile"
+              path="/profile"
               element={
                 <PrivateRoute>
-                  <Profile />
+                  <Profile isOwnProfilePage={true} />
                 </PrivateRoute>
               }
             />

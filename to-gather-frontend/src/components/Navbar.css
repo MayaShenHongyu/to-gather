@@ -6,7 +6,8 @@
   width: 100%;
   height: var(--navbar-height);
   position: absolute;
-  background-color: #121619;
+  top: 0;
+  /* background-color: #121619; */
   display: flex;
   flex-direction: row;
   border-bottom: white 300px;
@@ -45,6 +46,11 @@
 #create-event-btn {
   color: black;
   background-color: white;
+}
+
+#profile-btn {
+  color: white;
+  margin-left: 20px;
 }
 
 
