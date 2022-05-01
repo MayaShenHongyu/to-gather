@@ -1,31 +1,71 @@
 import React, { useState, useEffect } from "react";
-import EventImage from "../assets/boardgame.jpg";
+import { useAuth } from "../contexts/AuthContext";
 import Profile from "./Profile";
 import headImage from "../assets/xy-head.jpeg";
 import MapIcon from "@mui/icons-material/Map";
 import TagIcon from "@mui/icons-material/LocalOffer";
-import { getUser } from "../backend";
+import { getUser, getEvent, joinEvent, withdrawFromEvent } from "../backend";
 import "./Event.css";
 
-function Event({ eventData }) {
+function Event({ id, profileOnClickEvent }) {
+  const { currentUser } = useAuth();
   const [isViewingHost, setIsViewingHost] = useState(false);
   const [host, setHost] = useState();
+  const [eventData, setEventData] = useState();
+  const [isParticipating, setIsParticipating] = useState(false);
+
+  const isCurrentUserHost = host?.uid == currentUser?.uid;
 
   useEffect(() => {
-    getUser(eventData.hostID, setHost).catch((_error) => {
-      console.log(_error);
-    });
+    getEvent(id, setEventData);
   }, []);
 
-  if (!host) {
+  useEffect(() => {
+    if (eventData) {
+      getUser(eventData.hostID, setHost).catch((_error) => {
+        console.log(_error);
+      });
+      getUser(currentUser.uid, (user) =>
+        setIsParticipating(user.participating.includes(eventData.id))
+      );
+    }
+  }, [eventData]);
+
+  if (!host || !eventData) {
     return <div />;
   }
 
   if (isViewingHost) {
     return (
-      <Profile uid={eventData.hostID} goBack={() => setIsViewingHost(false)} />
+      <Profile
+        uid={eventData.hostID}
+        goBack={() => setIsViewingHost(false)}
+        onClickEvent={(id) => {
+          setIsViewingHost(false);
+          profileOnClickEvent(id);
+        }}
+      />
     );
   }
+
+  const buttonTitle =
+    host.uid == currentUser.uid
+      ? "Edit Event"
+      : isParticipating
+      ? "Unjoin"
+      : "Join";
+  const buttonAction =
+    host.uid == currentUser.uid
+      ? undefined
+      : isParticipating
+      ? withdrawFromEvent
+      : joinEvent;
+  const withForceUpdate = (action) => {
+    if (action) {
+      action(currentUser.uid, eventData.id);
+      setIsParticipating(!isParticipating);
+    }
+  };
 
   return (
     <>
@@ -50,18 +90,20 @@ function Event({ eventData }) {
 
             <p>{eventData.description}</p>
           </div>
-          <div className="eventHost" onClick={() => setIsViewingHost(true)}>
-            <div className="eventHostTop">
-              <div className="eventHostImg">
-                <img src={headImage} />
-              </div>
+          {!isCurrentUserHost && (
+            <div className="eventHost" onClick={() => setIsViewingHost(true)}>
+              <div className="eventHostTop">
+                <div className="eventHostImg">
+                  <img src={headImage} />
+                </div>
 
-              <h3>{`${host.firstName} ${host.lastName}`}</h3>
+                <h3>{`${host.firstName} ${host.lastName}`}</h3>
+              </div>
+              <div className="eventHostBottom">
+                <p>{host.bio}</p>
+              </div>
             </div>
-            <div className="eventHostBottom">
-              <p>{host.bio}</p>
-            </div>
-          </div>
+          )}
         </div>
         <div className="eventSignUp">
           <div className="eventSignUpDate">
@@ -73,7 +115,9 @@ function Event({ eventData }) {
             <p>8:00 pm</p>
           </div>
           <div className="button">
-            <button> Join! </button>
+            <button onClick={() => withForceUpdate(buttonAction)}>
+              {buttonTitle}
+            </button>
           </div>
         </div>
       </div>
