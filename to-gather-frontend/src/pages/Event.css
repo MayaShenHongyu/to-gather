@@ -34,7 +34,7 @@
 
 .eventInfo h2{
   color:black;
-  height: 15px;
+  height: flex;
 }
 
 .eventInfo h3{
@@ -63,6 +63,12 @@
 }
 
 .tag {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+.groupSize {
   flex-direction: row;
   display: flex;
   align-items: center;
@@ -139,7 +145,7 @@
 }
 
 .eventSignUp button{
-  padding: 0 70px;
+  padding: 0 60px;
   color: white;
   border: none;
   border-radius: 10px;
@@ -151,6 +157,7 @@
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
+  width:240px;
 }
 
 
