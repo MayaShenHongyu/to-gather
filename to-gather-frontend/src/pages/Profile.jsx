@@ -32,15 +32,14 @@ export default function Profile({ uid, goBack, onClickEvent }) {
       </div>
 
       <div className="profile">
-        <div className="profile-picture"></div>
-        <div className="name">{`${user.firstName} ${user.lastName}`}</div>
-        <div className="description">
-          I’m web designer, I work in programs like figma, adobe photoshop,
-          adobe illustrator
+        <div className="profile-picture">
+          {user.profilePic ? <img src={user.profilePic} /> : undefined}
         </div>
+        <div className="name">{`${user.firstName} ${user.lastName}`}</div>
+        <div className="description">{user.bio}</div>
         <div className="figures">
           <div className="figure">
-            <div className="number">20</div>
+            <div className="number">{user.hosting.length}</div>
             <div className="label">Hosted</div>
           </div>
           <Divider
@@ -49,24 +48,25 @@ export default function Profile({ uid, goBack, onClickEvent }) {
             flexItem
           />
           <div className="figure">
-            <div className="number">129</div>
+            <div className="number">{user.participating.length}</div>
             <div className="label">Participated</div>
           </div>
         </div>
 
         <div className="events">
           <div className="events-title">Hostings</div>
-          <div className="events-container"></div>
-          {events.map((e, idx) => (
-            <EventCard
-              key={idx}
-              title={e.name}
-              date={e.time}
-              imgSrc={e.thumbnail}
-              description={e.description}
-              onClick={() => onClickEvent(e.id)}
-            />
-          ))}
+          <div className="events-container">
+            {events.map((e, idx) => (
+              <EventCard
+                key={idx}
+                title={e.name}
+                date={e.time}
+                imgSrc={e.thumbnail}
+                description={e.description}
+                onClick={() => onClickEvent(e.id)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
