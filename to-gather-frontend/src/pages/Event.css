@@ -97,6 +97,7 @@
 
 .eventHost p{
   font-size: 15px;
+  width:100%;
 }
 
 .eventHostImg{
@@ -127,6 +128,7 @@
   border-top-right-radius: 30px;
   background-color: white;
   height: 12%;
+  padding-top: 10px;
 }
 
 .button {

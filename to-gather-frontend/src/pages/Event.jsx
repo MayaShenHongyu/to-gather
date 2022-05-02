@@ -78,7 +78,7 @@ function Event({ id, profileOnClickEvent }) {
         <div className="eventBottom">
           <div className="eventInfo">
             <h2>{eventData.name}</h2>
-            <h3>{`Hosted by${host.firstName}${host.lastName}`}</h3>
+            <h3>{`Hosted by ${host.firstName} ${host.lastName}`}</h3>
             <div className="location">
               <MapIcon fontSize="small" />
               <h4> 1 East Loop Road</h4>
@@ -108,11 +108,11 @@ function Event({ id, profileOnClickEvent }) {
         <div className="eventSignUp">
           <div className="eventSignUpDate">
             <h3>Date</h3>
-            <p>{`${eventData.time.toString()}`}</p>
+            <p>{`${eventData.time.toString().split(' ').slice(0,4).join(' ')}`}</p>
           </div>
           <div className="eventSignUpTime">
             <h3>Time</h3>
-            <p>8:00 pm</p>
+            <p>{`${eventData.time.toString().split(' ').slice(4,11).join(' ')}`}</p>
           </div>
           <div className="button">
             <button onClick={() => withForceUpdate(buttonAction)}>
