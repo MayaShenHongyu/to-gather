@@ -88,7 +88,9 @@
 .eventHost img{
   width: 50px;
   margin-right: 5px;
-  border-radius: 25px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .eventHost h3{

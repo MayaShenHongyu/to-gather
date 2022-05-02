@@ -19,9 +19,11 @@ export default function OwnProfile() {
   const [selectedEventID, setSelectedEventID] = useState();
 
   useEffect(() => {
-    getUser(currentUser.uid, setUser, setHosting).catch((_error) => {
-      console.log(_error);
-    });
+    getUser(currentUser.uid, setUser, setHosting, setParticipating).catch(
+      (_error) => {
+        console.log(_error);
+      }
+    );
   }, []);
 
   if (!user) {
@@ -40,12 +42,14 @@ export default function OwnProfile() {
         <Button id="edit-btn" startIcon={<Edit />}>
           Edit profile
         </Button>
-        <div className="profile-picture"></div>
+        <div className="profile-picture">
+          {user.profilePic ? <img src={user.profilePic} /> : undefined}
+        </div>
         <div className="name">{`${user.firstName} ${user.lastName}`}</div>
         <div className="description">{user.bio}</div>
         <div className="figures">
           <div className="figure">
-            <div className="number">20</div>
+            <div className="number">{hosting.length}</div>
             <div className="label">Hosted</div>
           </div>
           <Divider
@@ -54,7 +58,7 @@ export default function OwnProfile() {
             flexItem
           />
           <div className="figure">
-            <div className="number">129</div>
+            <div className="number">{participating.length}</div>
             <div className="label">Participated</div>
           </div>
         </div>

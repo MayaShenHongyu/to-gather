@@ -46,6 +46,13 @@
     /* left: calc(50vw - var(--profile-pic-size) / 2); */
     z-index: 1;
     border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-picture img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .name {
