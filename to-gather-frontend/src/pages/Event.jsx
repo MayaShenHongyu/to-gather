@@ -82,15 +82,15 @@ function Event({ id, profileOnClickEvent }) {
             <h3>{`Hosted by ${host.firstName} ${host.lastName}`}</h3>
             <div className="location">
               <MapIcon fontSize="small" />
-              <h4> 1 East Loop Road</h4>
+              <h4> {eventData.location ? eventData.location : "1 East Loop Road"}</h4>
             </div>
             <div className="tag">
               <TagIcon fontSize="small" />
-              <h4>Game, Entertainment</h4>
+              <h4>{eventData.tags.length == 0 ? "Game, Entertainment": eventData.tags.join(", ")}</h4>
             </div>
             <div className="groupSize">
               <PeopleIcon fontSize="small" />
-              <h4>10 People</h4>
+              <h4>{eventData.preferredGroupSize ?? "10" } People</h4>
             </div>
 
             <p>{eventData.description}</p>

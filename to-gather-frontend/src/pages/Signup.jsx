@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 import Footer from "../components/Footer";
@@ -33,6 +33,7 @@ function Signup() {
 
   const { register, currentUser } = useAuth();
   const location = useLocation();
+  const [img, setImg] = useState();
   const {
     register: reg,
     handleSubmit,
@@ -46,7 +47,9 @@ function Signup() {
   }
 
   const onSubmit = (data) => {
-    register(data.email + "@cornell.edu", data.password, data.userProps).catch(
+    // data.userProps.profilePic = img;
+    // console.log(data);
+    register(data.email + "@cornell.edu", data.password, {...data.userProps, profilePic: img}).catch(
       (err) => {
         console.log(err);
         handleError(setError, err.code);
@@ -67,76 +70,104 @@ function Signup() {
             </Grid>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-              <TextField
-                size="small"
-                className="form-field"
-                label="Email"
-                placeholder="Enter your email"
-                fullWidth
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">@cornell.edu</InputAdornment>
-                  ),
-                }}
-                {...reg("email", {
-                  required: "Required field",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+/i,
-                    message: "Invalid email address",
-                  },
-                })}
-                error={!!errors?.email}
-                helperText={errors?.email ? errors.email.message : null}
-              />
-              <TextField
-                size="small"
-                className="form-field"
-                label="Password"
-                placeholder="Enter your password"
-                type="password"
-                fullWidth
-                {...reg("password", {
-                  required: "Required field",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                })}
-                error={!!errors?.password}
-                helperText={errors?.password?.message}
-              />
-              <TextField
-                size="small"
-                className="form-field"
-                label="Confirm Password"
-                type="password"
-                fullWidth
-                {...reg("passwordConfirm", {
-                  shouldUnregister: true,
-                  validate: (value) =>
-                    value === watch("password") || "Passwords don't match.",
-                })}
-                error={!!errors?.passwordConfirm}
-                helperText={errors?.passwordConfirm?.message}
-              />
-              <TextField
-                size="small"
-                className="form-field"
-                label="First Name"
-                fullWidth
-                {...reg("userProps.firstName")}
-                error={!!errors?.firstName}
-                helperText={errors?.firstName?.message}
-              />
-              <TextField
-                size="small"
-                className="form-field"
-                label="Last Name"
-                fullWidth
-                {...reg("userProps.lastName")}
-                error={!!errors?.lastName}
-                helperText={errors?.lastName?.message}
-              />
+              <Grid container justifyContent={"space-between"}>
+                <TextField
+                  size="small"
+                  className="form-field"
+                  label="Email"
+                  placeholder="Enter your email"
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">@cornell.edu</InputAdornment>
+                    ),
+                  }}
+                  {...reg("email", {
+                    required: "Required field",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  error={!!errors?.email}
+                  helperText={errors?.email ? errors.email.message : null}
+                />
+                <TextField
+                  size="small"
+                  className="form-field"
+                  label="Password"
+                  placeholder="Enter your password"
+                  type="password"
+                  fullWidth
+                  {...reg("password", {
+                    required: "Required field",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                  error={!!errors?.password}
+                  helperText={errors?.password?.message}
+                />
+                <TextField
+                  size="small"
+                  className="form-field"
+                  label="Confirm Password"
+                  type="password"
+                  fullWidth
+                  {...reg("passwordConfirm", {
+                    shouldUnregister: true,
+                    validate: (value) =>
+                      value === watch("password") || "Passwords don't match.",
+                  })}
+                  error={!!errors?.passwordConfirm}
+                  helperText={errors?.passwordConfirm?.message}
+                />
+                <Grid item xs={5.5}>
+                  <TextField
+                    size="small"
+                    className="form-field"
+                    label="First Name"
+                    fullWidth
+                    {...reg("userProps.firstName")}
+                    error={!!errors?.firstName}
+                    helperText={errors?.firstName?.message}
+                  />
+
+                </Grid>
+
+                <Grid item xs={5.5}>
+                  <TextField
+                    size="small"
+                    className="form-field"
+                    label="Last Name"
+                    fullWidth
+                    {...reg("userProps.lastName")}
+                    error={!!errors?.lastName}
+                    helperText={errors?.lastName?.message}
+                  />
+                </Grid>
+
+                <TextField
+                  size="small"
+                  className="form-field"
+                  placeholder="Tell the community about yourself..."
+                  multiline
+                  fullWidth
+                  rows={3}
+                  {...reg("userProps.bio")}
+                />
+
+                <input
+                  type="file"
+                  style={{ paddingTop: "10px" }}
+                  onChange={(event) => setImg(event.target.files[0])}
+                />
+                
+              </Grid>
+              
+              
+
               <FormControl
                 className="form-field radio"
                 {...reg("userProps.gender")}

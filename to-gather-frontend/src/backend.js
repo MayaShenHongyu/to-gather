@@ -86,7 +86,7 @@ export const addNewUser = async (
     lastName,
     gender,
     bio,
-    profilePic,
+    profilePic: null,
     participating: [],
     hosting: [],
   });
@@ -105,12 +105,6 @@ export const uploadImage = async (storagePath, imagedata) => {
   return url;
 };
 
-export const downloadImage = async () => {
-  const storagePath = "WechatIMG1 1.jpeg";
-  const imgRef = ref(storage, storagePath);
-  const url = await getDownloadURL(imgRef);
-  console.log(url);
-};
 
 export const createEvent = async (
   hostID,

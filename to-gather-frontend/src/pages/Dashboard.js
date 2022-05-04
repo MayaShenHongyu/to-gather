@@ -7,7 +7,7 @@ import EventCard from "../components/EventCard";
 import Event from "./Event";
 import PostEvent from "../components/PostEvent";
 // import Footer from "../components/Footer";
-import { getFilteredEvents, downloadImage } from "../backend";
+import { getFilteredEvents } from "../backend";
 import {
   FormControl,
   Select,
@@ -29,7 +29,6 @@ export default function Dashboard() {
   const [isPostEventModalOpen, setIsPostEventModalOpen] = useState(false);
 
   useEffect(() => {
-    downloadImage();
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth();

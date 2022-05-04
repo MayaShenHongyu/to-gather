@@ -109,7 +109,6 @@ function PostEvent({ handleClose }) {
                     size="small"
                     id="datetime-local"
                     type="datetime-local"
-                    defaultValue="2022-04-27T10:30"
                     sx={{
                       width: 250,
                       paddingTop: "10px",
