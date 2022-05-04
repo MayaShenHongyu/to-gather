@@ -47,8 +47,9 @@ function Signup() {
   }
 
   const onSubmit = (data) => {
-    data.userProps.bio = img;
-    register(data.email + "@cornell.edu", data.password, data.userProps).catch(
+    // data.userProps.profilePic = img;
+    // console.log(data);
+    register(data.email + "@cornell.edu", data.password, {...data.userProps, profilePic: img}).catch(
       (err) => {
         console.log(err);
         handleError(setError, err.code);
