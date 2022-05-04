@@ -4,6 +4,7 @@ import Profile from "./Profile";
 import headImage from "../assets/xy-head.jpeg";
 import MapIcon from "@mui/icons-material/Map";
 import TagIcon from "@mui/icons-material/LocalOffer";
+import PeopleIcon from "@mui/icons-material/PeopleAlt";
 import { getUser, getEvent, joinEvent, withdrawFromEvent } from "../backend";
 import "./Event.css";
 
@@ -87,14 +88,18 @@ function Event({ id, profileOnClickEvent }) {
               <TagIcon fontSize="small" />
               <h4>Game, Entertainment</h4>
             </div>
+            <div className="groupSize">
+              <PeopleIcon fontSize="small" />
+              <h4>10 People</h4>
+            </div>
 
             <p>{eventData.description}</p>
           </div>
-          {!isCurrentUserHost && (
+          {/* {!isCurrentUserHost && (
             <div className="eventHost" onClick={() => setIsViewingHost(true)}>
               <div className="eventHostTop">
                 <div className="eventHostImg">
-                  <img src={headImage} />
+                  <img src={host.profilePic ? host.profilePic : headImage} />
                 </div>
 
                 <h3>{`${host.firstName} ${host.lastName}`}</h3>
@@ -103,16 +108,36 @@ function Event({ id, profileOnClickEvent }) {
                 <p>{host.bio}</p>
               </div>
             </div>
-          )}
+          )} */}
+          <div className="eventHost" onClick={() => setIsViewingHost(true)}>
+            <div className="eventHostTop">
+              <div className="eventHostImg">
+                <img src={host.profilePic ? host.profilePic : headImage} />
+              </div>
+
+              <h3>{`${host.firstName} ${host.lastName}`}</h3>
+            </div>
+            <div className="eventHostBottom">
+              <p>{host.bio}</p>
+            </div>
+          </div>
         </div>
         <div className="eventSignUp">
           <div className="eventSignUpDate">
             <h3>Date</h3>
-            <p>{`${eventData.time.toString().split(' ').slice(0,4).join(' ')}`}</p>
+            <p>{`${eventData.time
+              .toString()
+              .split(" ")
+              .slice(0, 4)
+              .join(" ")}`}</p>
           </div>
           <div className="eventSignUpTime">
             <h3>Time</h3>
-            <p>{`${eventData.time.toString().split(' ').slice(4,11).join(' ')}`}</p>
+            <p>{`${eventData.time
+              .toString()
+              .split(" ")
+              .slice(4, 5)
+              .join(" ")}`}</p>
           </div>
           <div className="button">
             <button onClick={() => withForceUpdate(buttonAction)}>

@@ -7,7 +7,7 @@ import EventCard from "../components/EventCard";
 import Event from "./Event";
 import PostEvent from "../components/PostEvent";
 // import Footer from "../components/Footer";
-import { getFilteredEvents, uploadImage } from "../backend";
+import { getFilteredEvents, downloadImage } from "../backend";
 import {
   FormControl,
   Select,
@@ -29,6 +29,7 @@ export default function Dashboard() {
   const [isPostEventModalOpen, setIsPostEventModalOpen] = useState(false);
 
   useEffect(() => {
+    downloadImage();
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth();
@@ -107,7 +108,7 @@ export default function Dashboard() {
           <div className="event-modal">
             <Event
               id={selectedEventID}
-              profileOnClickEvent={setSelectedEventID}
+              profileOnClickEvent={(id) => setSelectedEventID(id)}
             />
           </div>
         </Modal>

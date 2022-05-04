@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import {
   setDoc,
   doc,
@@ -73,12 +74,13 @@ export const getUser = async (
   }
 };
 
-export const addNewUser = (
+export const addNewUser = async (
   userID,
   email,
   { firstName, lastName, gender, bio = null, profilePic = null }
-) =>
-  setDoc(doc(db, USERS, userID), {
+) => {
+  const userRef = doc(db, USERS, userID);
+  await setDoc(userRef, {
     email,
     firstName,
     lastName,
@@ -89,12 +91,25 @@ export const addNewUser = (
     hosting: [],
   });
 
+  const profileURL = await uploadImage(userRef.id, profilePic);
+  await updateDoc(userRef, {
+    profilePic: profileURL,
+  });
+};
+
 export const uploadImage = async (storagePath, imagedata) => {
   const imgRef = ref(storage, storagePath);
   await uploadBytes(imgRef, imagedata);
   const url = await getDownloadURL(imgRef);
   console.log(url);
   return url;
+};
+
+export const downloadImage = async () => {
+  const storagePath = "WechatIMG1 1.jpeg";
+  const imgRef = ref(storage, storagePath);
+  const url = await getDownloadURL(imgRef);
+  console.log(url);
 };
 
 export const createEvent = async (
